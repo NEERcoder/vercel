@@ -432,7 +432,7 @@ module.exports = async function prepare(session, binaryPath, tmpFixturesDir) {
         },
       }),
     },
-    'vc-build-global-web-analytics': {
+    'vc-build-indirect-web-analytics': {
       '.vercel/project.json': JSON.stringify({
         orgId: '.',
         projectId: '.',
