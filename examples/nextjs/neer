@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Chat</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+        }
+
+        #messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: scroll;
+            max-height: 300px;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        #message-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #send-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <ul id="messages"></ul>
+        <div id="input-container">
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('message-input');
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                appendMessage('You', message);
+                messageInput.value = '';
+                // Simulate receiving a message after a short delay
+                setTimeout(() => {
+                    const randomUser = generateRandomUsername();
+                    appendMessage(randomUser, getRandomMessage());
+                }, 1000);
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const li = document.createElement('li');
+            li.textContent = `${sender}: ${text}`;
+            messagesContainer.appendChild(li);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateRandomUsername() {
+            const adjectives = ['Happy', 'Silly', 'Clever', 'Swift', 'Witty'];
+            const nouns = ['Penguin', 'Fox', 'Star', 'Moon', 'Robot'];
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            return `${randomAdjective} ${randomNoun}`;
+        }
+
+        function getRandomMessage() {
+            const messages = ['Hello!', 'How are you?', 'Nice to meet you!', 'What\'s up?', 'Random message!'];
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+    </script>
+</body>
+</html>
